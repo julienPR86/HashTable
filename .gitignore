@@ -1,0 +1,11 @@
+#executable
+libHashTable.a
+
+#objects files
+objs/
+
+#vscode files
+.vscode/
+
+#valgrind files
+vgcore.*
