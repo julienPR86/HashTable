@@ -6,7 +6,7 @@ HTNode	*HTNode_get(const HTNode *head, const char *key)
 		return (NULL);
 	while (head)
 	{
-		if (0 == strcmp(head->key, key))
+		if (0 == strCompare(head->key, key))
 			break;
 		head = head->next;
 	}

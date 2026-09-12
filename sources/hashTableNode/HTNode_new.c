@@ -9,7 +9,7 @@ HTNode	*HTNode_new(const char *key, size_t value)
 	new = malloc(sizeof(HTNode));
 	if (NULL == new)
 		return (NULL);
-	new->key = strdup(key);
+	new->key = strDup(key);
 	if (NULL == new->key)
 	{
 		free(new);
