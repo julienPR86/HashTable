@@ -2,7 +2,8 @@
 # define HASHTABLENODE_H
 
 # include <stdlib.h>
-# include <string.h>
+# define LIBSTR_IMPLEMENTATION
+# include "libstr.h"
 
 typedef struct s_hashTableNode
 {
