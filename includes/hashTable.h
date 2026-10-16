@@ -66,11 +66,6 @@ HashTable	*HashTable_cpy(const HashTable *src);
 HTNode	*HashTable_first(HashTable *table);
 
 /**
- * @brief Returns the biggest element in the table.
- */
-HTNode	*HashTable_max(HashTable *table);
-
-/**
  * @brief Display the table.
  */
 void	HashTable_display(HashTable *table);

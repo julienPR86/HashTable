@@ -21,6 +21,4 @@ HTNode	*HTNode_get(const HTNode *head, const char *key);
 
 HTNode	*HTNode_cpy(const HTNode *src);
 
-HTNode	*HTNode_max(HTNode *head);
-
 #endif

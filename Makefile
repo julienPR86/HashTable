@@ -4,8 +4,8 @@ CFLAGS = -Wall -Wextra -Werror
 INCLUDES = includes
 
 VPATH = sources:sources/hashTable:sources/hashTableNode
-SRCS =	HashTable_cpy.c HashTable_destroy.c HashTable_display.c HashTable_first.c HashTable_get.c HashTable_max.c HashTable_new.c HashTable_set.c \
-		HTNode_append.c HTNode_cpy.c HTNode_destroy.c HTNode_get.c HTNode_max.c HTNode_new.c \
+SRCS =	HashTable_cpy.c HashTable_destroy.c HashTable_display.c HashTable_first.c HashTable_get.c HashTable_new.c HashTable_set.c \
+		HTNode_append.c HTNode_cpy.c HTNode_destroy.c HTNode_get.c HTNode_new.c \
 		hash.c
 
 OBJDIR = objs
