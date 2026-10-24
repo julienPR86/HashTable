@@ -1,14 +1,18 @@
 #include "hashTable.h"
 #include "hash.h"
 
-HTNode	*HashTable_get(const HashTable *table, const char *key)
+t_HTEntry	*HashTable_get(const HashTable *table, const char *key)
 {
 	size_t	hashv;
+	t_llist	*node;
 
 	if (NULL == table || NULL == key)
 		return (NULL);
 	hashv = hash(key);
 	if (hashv >= table->capacity)
 		return (NULL);
-	return (HTNode_get(*(table->data + hashv), key));
+	node = llistGetFor(*(table->data + hashv), (t_llistCompareFn)&HTEntryCompareKeys, key);
+	if (NULL == node)
+		return (NULL);
+	return (node->data);
 }

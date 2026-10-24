@@ -1,6 +1,6 @@
 #include "hashTable.h"
 
-HTNode	*HashTable_first(HashTable *table)
+t_HTEntry	*HashTable_first(HashTable *table)
 {
 	size_t	index = 0;
 
@@ -12,5 +12,5 @@ HTNode	*HashTable_first(HashTable *table)
 			break;
 		++index;
 	}
-	return (*(table->data + index));
+	return (((t_llist *)*(table->data + index))->data);
 }

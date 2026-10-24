@@ -10,10 +10,11 @@ void	HashTable_display(HashTable *table)
 	{
 		if (*(table->data + index))
 		{
-			HTNode	*cur = *(table->data + index);
+			t_llist	*cur = *(table->data + index);
 			while (cur)
 			{
-				printf("%s: %zu\n", cur->key, cur->value);
+				if (cur->data)
+					printf("%s: %zu\n", ((t_HTEntry *)cur->data)->key, ((t_HTEntry *)cur->data)->value);
 				cur = cur->next;
 			}
 		}

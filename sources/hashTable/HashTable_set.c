@@ -3,54 +3,56 @@
 
 HashTable	*HashTable_set(HashTable *table, const char *key, const size_t value)
 {
-	size_t	hashv;
+	size_t		hashv;
+	t_HTEntry	*entry;
 
 	if (NULL == table || NULL == key)
 		return (NULL);
 	hashv = hash(key);
+	entry = HTEntryNew(key, value);
+	if (NULL == entry)
+		return (NULL);
 	if (hashv >= table->capacity)
 	{
-		size_t	index = 0;
-		HashTable	*new = HashTable_new(hashv + 1);
-
-		if (NULL == new)
-			return (NULL);
-		while (index < table->capacity)
+		//TODO: save a copy of data in case realloc fails
+		table->data = realloc(table->data, (hashv + 1) * sizeof(t_llist *));
+		if (NULL == table->data)
 		{
-			if (NULL != *(table->data + index))
-			{
-				*(new->data + index) = HTNode_cpy(*(table->data + index));
-				if (NULL == *(new->data + index))
-				{
-					HashTable_destroy(new);
-					return (NULL);
-				}
-			}
-			++index;
-		}
-		HashTable_destroy_data(table);
-		table->data = new->data;
-		table->bsize = new->bsize;
-		table->capacity = new->capacity;
-		if (NULL == HTNode_append(table->data + hashv, key, value))
+			free(entry);
 			return (NULL);
-		free(new);
+		}
+		strMemSet(table->data + table->capacity, 0, (hashv + 1 - table->capacity) * sizeof(t_llist *));
+		table->bsize = (hashv + 1) * sizeof(t_llist *);
+		table->capacity = hashv + 1;
+		if (NULL == llistPushBack(table->data + hashv, llistNew(entry)))
+		{
+			free(entry);
+			return (NULL);
+		}
 		return (table);
 	}
+
 	if (NULL == *(table->data + hashv))
 	{
-		*(table->data + hashv) = HTNode_new(key, value);
+		*(table->data + hashv) = llistNew(entry);
 		if (NULL == *(table->data + hashv))
+		{
+			free(entry);
 			return (NULL);
-	}
-
-	HTNode	*node = HTNode_get(*(table->data + hashv), key);
-	if (NULL == node)
-	{
-		if (NULL == HTNode_append(table->data + hashv, key, value))
-			return (NULL);
+		}
 		return (table);
 	}
-	node->value = value;
+
+	t_llist	*node = llistGetFor(*(table->data + hashv), (t_llistCompareFn)&HTEntryCompareKeys, key);
+	if (NULL == node)
+	{
+		if (NULL == llistPushBack(table->data + hashv, llistNew(entry)))
+		{
+			free(entry);
+			return (NULL);
+		}
+		return (table);
+	}
+	((t_HTEntry *)node->data)->value = value;
 	return (table);
 }

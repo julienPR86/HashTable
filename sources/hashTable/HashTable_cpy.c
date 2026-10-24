@@ -14,7 +14,7 @@ HashTable	*HashTable_cpy(const HashTable *src)
 	{
 		if (NULL != *(src->data + index))
 		{
-			*(cpy->data + index) = HTNode_cpy(*(src->data + index));
+			*(cpy->data + index) = llistDup(*(src->data + index), (t_llistDupFn)&HTEntryDup, (t_llistDestroyFn)&HTEntryDestroy);
 			if (NULL == *(cpy->data + index))
 			{
 				HashTable_destroy(cpy);
