@@ -4,7 +4,7 @@ CFLAGS = -Wall -Wextra -Werror
 INCLUDES = includes
 
 VPATH = sources:sources/hashTable:sources/hashTableEntry
-SRCS =	hashtableNew.c hashtableDestroy.c hashtableGet.c hashtableSet.c hashtableDup.c hashtableFirst.c \
+SRCS =	hashtableNew.c hashtableDestroy.c hashtableGet.c hashtableSet.c hashtableDup.c \
 		hashTableEntryNew.c hashTableEntryDup.c hashTableEntryDestroy.c hashTableEntryCompare.c \
 		hash.c
 

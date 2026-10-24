@@ -54,10 +54,4 @@ t_hashtable	*hashtableSet(t_hashtable *table, const char *key, const size_t valu
  */
 t_hashtable	*hashtableDup(const t_hashtable *src);
 
-/**
- * @brief Returns a pointer to the first valid entry in the table.
- * @return The entry's pointer.
- */
-t_HTEntry	*hashtableFirst(t_hashtable *table);
-
 #endif
