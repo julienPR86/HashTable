@@ -1,9 +1,9 @@
 #include "hashTable.h"
 
-HashTable	*HashTable_dup(const HashTable *src)
+t_hashtable	*HashTable_dup(const t_hashtable *src)
 {
-	size_t	index = 0;
-	HashTable	*cpy;
+	size_t		index = 0;
+	t_hashtable	*cpy;
 
 	if (NULL == src)
 		return (NULL);

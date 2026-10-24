@@ -1,7 +1,7 @@
 #include "hashTable.h"
 #include "hash.h"
 
-HashTable	*HashTable_set(HashTable *table, const char *key, const size_t value)
+t_hashtable	*HashTable_set(t_hashtable *table, const char *key, const size_t value)
 {
 	size_t		hashv;
 	t_HTEntry	*entry;

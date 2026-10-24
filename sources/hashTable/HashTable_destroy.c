@@ -1,6 +1,6 @@
 #include "hashTable.h"
 
-void	HashTable_destroy(HashTable *table)
+void	HashTable_destroy(t_hashtable *table)
 {
 	if (NULL == table)
 		return ;

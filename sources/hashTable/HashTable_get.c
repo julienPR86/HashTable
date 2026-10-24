@@ -1,7 +1,7 @@
 #include "hashTable.h"
 #include "hash.h"
 
-t_HTEntry	*HashTable_get(const HashTable *table, const char *key)
+t_HTEntry	*HashTable_get(const t_hashtable *table, const char *key)
 {
 	size_t	hashv;
 	t_llist	*node;

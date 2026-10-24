@@ -1,10 +1,10 @@
 #include "hashTable.h"
 
-HashTable	*HashTable_new(size_t initial_capacity)
+t_hashtable	*HashTable_new(size_t initial_capacity)
 {
-	HashTable	*new;
+	t_hashtable	*new;
 
-	new = malloc(sizeof(HashTable));
+	new = malloc(sizeof(t_hashtable));
 	if (NULL == new)
 		return (NULL);
 	new->bsize = initial_capacity * sizeof(t_HTEntry *);

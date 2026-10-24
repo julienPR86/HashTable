@@ -1,6 +1,6 @@
 #include "hashTable.h"
 
-void	HashTable_display(HashTable *table)
+void	HashTable_display(t_hashtable *table)
 {
 	size_t	index = 0;
 
