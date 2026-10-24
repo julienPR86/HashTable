@@ -3,9 +3,10 @@
 
 # include <stdio.h>
 # include <stdlib.h>
-# include <string.h>
 
-# include "hashTableNode.h"
+# include "hashTableEntry.h"
+# include "libstr.h"
+# include "libllist.h"
 
 typedef struct s_hashTable
 {
@@ -21,7 +22,7 @@ typedef struct s_hashTable
 	 * @brief Pointer to the data array
 	 * @warning It is not NULL terminated !
 	 */
-	HTNode	**data;
+	t_llist	**data;
 }	HashTable;
 
 /**
@@ -37,15 +38,10 @@ HashTable	*HashTable_new(size_t initial_capacity);
 void	HashTable_destroy(HashTable *table);
 
 /**
- * @brief Destroys the hash table data.
- */
-void	HashTable_destroy_data(HashTable *table);
-
-/**
  * @brief Searches the corresponding node inside the table.
  * @return A pointer to the key node.
  */
-HTNode	*HashTable_get(const HashTable *table, const char *key);
+t_HTEntry	*HashTable_get(const HashTable *table, const char *key);
 
 /**
  * @brief Stores data inside the table if key is inexistent, updates it otherwise.
@@ -63,7 +59,7 @@ HashTable	*HashTable_cpy(const HashTable *src);
  * @brief Returns a pointer to the first valid entry in the table.
  * @return The entry's pointer.
  */
-HTNode	*HashTable_first(HashTable *table);
+t_HTEntry	*HashTable_first(HashTable *table);
 
 /**
  * @brief Display the table.
