@@ -3,7 +3,10 @@ CFLAGS = -Wall -Wextra -Werror
 
 INCLUDES = includes
 
-
+VPATH = sources:sources/hashTable:sources/hashTableEntry
+SRCS =	HashTable_new.c HashTable_destroy.c HashTable_get.c HashTable_set.c HashTable_cpy.c HashTable_display.c HashTable_first.c \
+		hashTableEntryNew.c hashTableEntryDup.c hashTableEntryDestroy.c hashTableEntryCompare.c \
+		hash.c
 
 OBJDIR = objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
