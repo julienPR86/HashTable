@@ -1,7 +1,6 @@
 #ifndef HASHMAP_H
 # define HASHMAP_H
 
-# include <stdio.h>
 # include <stdlib.h>
 
 # include "hashTableEntry.h"
@@ -60,10 +59,5 @@ t_hashtable	*hashtableDup(const t_hashtable *src);
  * @return The entry's pointer.
  */
 t_HTEntry	*hashtableFirst(t_hashtable *table);
-
-/**
- * @brief Display the table.
- */
-void	hashtableDisplay(t_hashtable *table);
 
 #endif
