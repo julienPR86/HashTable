@@ -3,13 +3,18 @@ CFLAGS = -Wall -Wextra -Werror
 
 INCLUDES = includes
 
-VPATH = sources:sources/hashTable:sources/hashTableNode
-SRCS =	HashTable_cpy.c HashTable_destroy.c HashTable_display.c HashTable_first.c HashTable_get.c HashTable_new.c HashTable_set.c \
-		HTNode_append.c HTNode_cpy.c HTNode_destroy.c HTNode_get.c HTNode_new.c \
-		hash.c
+
 
 OBJDIR = objs
 OBJS = $(addprefix $(OBJDIR)/, $(SRCS:.c=.o))
+
+LIBSDIR = libs
+
+LIBSTRDIR = $(LIBSDIR)/libstr
+LIBSTR = $(LIBSTRDIR)/libstr.h
+
+LIBLLISTDIR = $(LIBSDIR)/libllist
+LIBLLIST = $(LIBLLISTDIR)/libllist.h
 
 NAME = libHashTable.a
 
@@ -18,8 +23,23 @@ all : $(NAME)
 $(NAME) : $(OBJS)
 	ar -rcs $@ $^
 
-$(OBJDIR)/%.o : %.c | $(OBJDIR)
-	$(CC) $(CFLAGS) -o $@ -c $< -I $(INCLUDES)
+$(OBJDIR)/%.o : %.c | $(OBJDIR) $(LIBSTR) $(LIBLLIST)
+	$(CC) $(CFLAGS) -o $@ -c $< -I $(INCLUDES) -I $(LIBSTRDIR) -I $(LIBLLISTDIR)
+
+$(LIBSDIR) :
+	mkdir -p $@
+
+$(LIBSTRDIR) : | $(LIBSDIR)
+	mkdir -p $@
+
+$(LIBSTR) : $(LIBSTRDIR)
+	git clone https://github.com/julienPR86/libstr.git $@
+
+$(LIBLLISTDIR) : | $(LIBSDIR)
+	mkdir -p $@
+
+$(LIBLLIST) : $(LIBLLISTDIR)
+	git clone https://github.com/julienPR86/libllist.git $@
 
 $(OBJDIR) :
 	mkdir -p $@
@@ -30,6 +50,9 @@ clean :
 fclean : clean
 	rm -f $(NAME)
 
+lclean :
+	rm -rf $(LIBSDIR)
+
 re : fclean all
 
-.PHONY : all clean fclean re
+.PHONY : all clean lclean fclean re
