@@ -1,5 +1,5 @@
-#ifndef HASHMAP_H
-# define HASHMAP_H
+#ifndef LIBHASHTABLE_H
+# define LIBHASHTABLE_H
 
 # include <stdlib.h>
 
