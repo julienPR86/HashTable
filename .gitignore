@@ -1,6 +1,3 @@
-#executable
-libHashTable.a
-
 #objects files
 objs/
 
@@ -13,5 +10,7 @@ libs/
 #valgrind files
 vgcore.*
 
-#test dir
-test/
+#test files
+Makefile
+main.c
+main
