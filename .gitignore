@@ -12,3 +12,6 @@ libs/
 
 #valgrind files
 vgcore.*
+
+#test dir
+test/
