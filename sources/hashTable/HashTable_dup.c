@@ -1,6 +1,6 @@
 #include "hashTable.h"
 
-HashTable	*HashTable_cpy(const HashTable *src)
+HashTable	*HashTable_dup(const HashTable *src)
 {
 	size_t	index = 0;
 	HashTable	*cpy;

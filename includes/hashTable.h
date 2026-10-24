@@ -53,7 +53,7 @@ HashTable	*HashTable_set(HashTable *table, const char *key, const size_t value);
  * @brief Creates an allocated copy of src.
  * @return A pointer to the copy.
  */
-HashTable	*HashTable_cpy(const HashTable *src);
+HashTable	*HashTable_dup(const HashTable *src);
 
 /**
  * @brief Returns a pointer to the first valid entry in the table.
