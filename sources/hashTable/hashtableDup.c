@@ -1,13 +1,13 @@
 #include "hashTable.h"
 
-t_hashtable	*HashTable_dup(const t_hashtable *src)
+t_hashtable	*hashtableDup(const t_hashtable *src)
 {
 	size_t		index = 0;
 	t_hashtable	*cpy;
 
 	if (NULL == src)
 		return (NULL);
-	cpy = HashTable_new(src->capacity);
+	cpy = hashtableNew(src->capacity);
 	if (NULL == cpy)
 		return (NULL);
 	while (index < src->capacity)
@@ -17,7 +17,7 @@ t_hashtable	*HashTable_dup(const t_hashtable *src)
 			*(cpy->data + index) = llistDup(*(src->data + index), (t_llistDupFn)&HTEntryDup, (t_llistDestroyFn)&HTEntryDestroy);
 			if (NULL == *(cpy->data + index))
 			{
-				HashTable_destroy(cpy);
+				hashtableDestroy(cpy);
 				return (NULL);
 			}
 		}

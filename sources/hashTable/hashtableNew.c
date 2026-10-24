@@ -1,6 +1,6 @@
 #include "hashTable.h"
 
-t_hashtable	*HashTable_new(size_t initial_capacity)
+t_hashtable	*hashtableNew(size_t initial_capacity)
 {
 	t_hashtable	*new;
 

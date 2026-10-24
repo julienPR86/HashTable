@@ -1,6 +1,6 @@
 #include "hashTable.h"
 
-t_HTEntry	*HashTable_first(t_hashtable *table)
+t_HTEntry	*hashtableFirst(t_hashtable *table)
 {
 	size_t	index = 0;
 
