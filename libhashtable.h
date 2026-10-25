@@ -34,15 +34,15 @@ typedef struct s_hashTable
 }	t_hashtable;
 
 /**
- * @brief Creates a new hash table.
+ * @brief Creates a new hashTableHash table.
  * @param initial_capacity The initial number of entries the table can store.
- * @return A pointer to the newly created hash table.
+ * @return A pointer to the newly created hashTableHash table.
  */
 t_hashtable	*hashtableNew(size_t initial_capacity);
 
 /**
  * @brief Stores data inside the table if key is inexistent, updates it otherwise.
- * @return The updated hash table.
+ * @return The updated hashTableHash table.
  */
 t_hashtable	*hashtableSet(t_hashtable *table, const char *key, const size_t value);
 
@@ -59,7 +59,7 @@ t_hashtableEntry	*hashtableGet(const t_hashtable *table, const char *key);
 t_hashtable	*hashtableDup(const t_hashtable *src);
 
 /**
- * @brief Destroys allocated data and the hash table pointer.
+ * @brief Destroys allocated data and the hashTableHash table pointer.
  */
 void	hashtableDestroy(t_hashtable *table);
 
@@ -70,7 +70,7 @@ void	hashtableDestroy(t_hashtable *table);
 # endif
 # include "libs/libstr/libstr.h"
 
-static size_t	hash(const char *key)
+static size_t	hashTableHash(const char *key)
 {
 	size_t	hashv;
 
@@ -84,7 +84,7 @@ static size_t	hash(const char *key)
 	return (hashv);
 }
 
-static t_hashtableEntry	*HTEntryNew(const char *key, size_t val)
+static t_hashtableEntry	*hashtableEntryNew(const char *key, size_t val)
 {
 	t_hashtableEntry	*new;
 
@@ -101,23 +101,23 @@ static t_hashtableEntry	*HTEntryNew(const char *key, size_t val)
 	return (new);
 }
 
-static t_hashtableEntry	*HTEntryDup(const t_hashtableEntry *src)
+static t_hashtableEntry	*hashtableEntryDup(const t_hashtableEntry *src)
 {
 	t_hashtableEntry	*dup;
 
-	dup = HTEntryNew(src->key, src->value);
+	dup = hashtableEntryNew(src->key, src->value);
 	if (NULL == dup)
 		return (NULL);
 	return (dup);
 }
 
 
-static int	HTEntryCompareKeys(const char *key1, const char *key2)
+static int	hashtableEntryCompareKeys(const char *key1, const char *key2)
 {
 	return (strCompare(key1, key2));
 }
 
-static void	HTEntryDestroy(t_hashtableEntry *entry)
+static void	hashtableEntryDestroy(t_hashtableEntry *entry)
 {
 	if (NULL == entry)
 		return ;
@@ -152,8 +152,8 @@ t_hashtable	*hashtableSet(t_hashtable *table, const char *key, const size_t valu
 
 	if (NULL == table || NULL == key)
 		return (NULL);
-	hashv = hash(key);
-	entry = HTEntryNew(key, value);
+	hashv = hashTableHash(key);
+	entry = hashtableEntryNew(key, value);
 	if (NULL == entry)
 		return (NULL);
 	if (hashv >= table->capacity)
@@ -187,7 +187,7 @@ t_hashtable	*hashtableSet(t_hashtable *table, const char *key, const size_t valu
 		return (table);
 	}
 
-	t_llist	*node = llistGetFor(*(table->data + hashv), (t_llistCompareFn)&HTEntryCompareKeys, key);
+	t_llist	*node = llistGetFor(*(table->data + hashv), (t_llistCompareFn)&hashtableEntryCompareKeys, key);
 	if (NULL == node)
 	{
 		if (NULL == llistPushBack(table->data + hashv, llistNew(entry)))
@@ -208,10 +208,10 @@ t_hashtableEntry	*hashtableGet(const t_hashtable *table, const char *key)
 
 	if (NULL == table || NULL == key)
 		return (NULL);
-	hashv = hash(key);
+	hashv = hashTableHash(key);
 	if (hashv >= table->capacity)
 		return (NULL);
-	node = llistGetFor(*(table->data + hashv), (t_llistCompareFn)&HTEntryCompareKeys, key);
+	node = llistGetFor(*(table->data + hashv), (t_llistCompareFn)&hashtableEntryCompareKeys, key);
 	if (NULL == node)
 		return (NULL);
 	return (node->data);
@@ -231,7 +231,7 @@ t_hashtable	*hashtableDup(const t_hashtable *src)
 	{
 		if (NULL != *(src->data + index))
 		{
-			*(cpy->data + index) = llistDup(*(src->data + index), (t_llistDupFn)&HTEntryDup, (t_llistDestroyFn)&HTEntryDestroy);
+			*(cpy->data + index) = llistDup(*(src->data + index), (t_llistDupFn)&hashtableEntryDup, (t_llistDestroyFn)&hashtableEntryDestroy);
 			if (NULL == *(cpy->data + index))
 			{
 				hashtableDestroy(cpy);
@@ -253,7 +253,7 @@ void	hashtableDestroy(t_hashtable *table)
 		{
 			if (NULL == *(table->data + i))
 				continue;
-			llistDestroy(table->data + i, (t_llistDestroyFn)&HTEntryDestroy);
+			llistDestroy(table->data + i, (t_llistDestroyFn)&hashtableEntryDestroy);
 		}
 		free(table->data);
 		table->data = NULL;
