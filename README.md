@@ -1,27 +1,16 @@
-# My simple Hash Table library
+# My simple hash table library
 
 ## Description
 
-This project is about recreating a simple implementation of a hash table in C.
-
-### dependencies
-
-- `gcc`
-- `make`
+This is a simple hash table library that I use in my personal projects.
 
 ## Instructions
 
-To compile the lib:
-```
-make
-```
+To use this lib, you can add the header in the necessary files, and add `#define LIBHASHTABLE_IMPLEMENTATION` in **only one** of them to get access to the function definitions.
 
-To remove the object files:
-```
-make clean
-```
+It should look something like:
 
-To remove object files and executable:
-```
-make fclean
+```c
+#define LIBHASHTABLE_IMPLEMENTATION
+#include "libhashtable.h"
 ```
