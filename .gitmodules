@@ -1,0 +1,7 @@
+[submodule "libs/libstr"]
+	path = libs/libstr
+	url = https://github.com/julienPR86/libstr
+
+[submodule "libs/libllist"]
+	path = libs/libllist
+	url = https://github.com/julienPR86/libllist
