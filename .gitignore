@@ -1,9 +1,6 @@
 #objects files
 objs/
 
-#libs
-libs/
-
 #vscode files
 .vscode/
 
