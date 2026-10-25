@@ -70,25 +70,17 @@ void	hashtableDestroy(t_hashtable *table);
 # endif
 # include "libs/libstr/libstr.h"
 
-static size_t	strvalue(const char *s)
-{
-	size_t	v = 0;
-
-	if (NULL == s)
-		return (0);
-	while (*s)
-	{
-		v += *s;
-		++s;
-	}
-	return (v);
-}
-
 static size_t	hash(const char *key)
 {
 	size_t	hashv;
 
-	hashv = strvalue(key);
+	if (NULL == key)
+		return (0);
+	while (*key)
+	{
+		hashv += *key;
+		++key;
+	}
 	return (hashv);
 }
 
