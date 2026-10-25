@@ -160,10 +160,12 @@ t_hashtable	*hashtableSet(t_hashtable *table, const char *key, const size_t valu
 		return (NULL);
 	if (hashv >= table->capacity)
 	{
-		//TODO: save a copy of data in case realloc fails
+		t_llist	**old_data = table->data;
+
 		table->data = realloc(table->data, (hashv + 1) * sizeof(t_llist *));
 		if (NULL == table->data)
 		{
+			table->data = old_data;
 			free(entry);
 			return (NULL);
 		}
